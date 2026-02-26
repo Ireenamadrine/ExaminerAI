@@ -1,0 +1,1 @@
+﻿Recursion solves a problem by calling itself on smaller versions of the same problem. The base case stops repeated calls. The recursive case reduces input and moves toward the base case.

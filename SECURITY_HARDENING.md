@@ -1,0 +1,22 @@
+Security and misuse controls implemented in this codebase.
+
+- Offline by default:
+  - `control_panel/state.json` ships with `web_access: false`, `llm_enabled: false`.
+- Allowlist-only web access:
+  - `web_check/allowlist.json` defines permitted domains.
+  - `web_check/fetcher.py` enforces allowlist and denies when web access is disabled.
+- Rate limiting and input bounds:
+  - `bridge/server.py` caps 30 requests/min per client and refuses inputs >4k chars.
+- Action safety:
+  - Cognitive control redirects risky states to refuse/silence/step-by-step.
+  - Tutor execution is deterministic; no free-form generation.
+- Reward shaping discourages unsafe behavior:
+  - `core_intelligence/rewards.py` rewards refusal and silence when appropriate.
+- Profile integrity:
+  - Profiles are validated (`architecture/profiles.py`) and persisted centrally via control panel state.
+- Data retention:
+  - Interactions logged to local SQLite only; no network exfiltration.
+- Web fetch isolation:
+  - Fetched content not fed into learning (only returned to caller).
+- CLI/server surface minimization:
+  - Only documented commands/routes are exposed; unknown paths/commands return errors.

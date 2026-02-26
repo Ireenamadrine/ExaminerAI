@@ -1,0 +1,25 @@
+Play Store compliance essentials for this app (offline-first, no bundled large models).
+
+- Data Safety Form:
+  - Collects: locally stored user text, interaction logs (SQLite). No PII transmission.
+  - Shared: none; no third-party SDKs.
+  - Deletes: user can clear app data; provide a “Reset data” action.
+- Permissions:
+  - Network optional; gate behind “Web access” toggle.
+  - No background location, contacts, SMS, or phone state.
+  - Internet permission justified as “fetching official documentation when user allows.”
+- Content policies:
+  - Refusal path for unsafe topics; document in app description.
+  - No generated medical/financial advice; refuse when confidence low.
+- Ads/Monetization:
+  - None; declare “No ads.”
+- Encryption:
+  - Use HTTPS for any outbound web check; allowlist enforced.
+- Min/Target SDK:
+  - minSdk 26, targetSdk 34 (modern permission model).
+- Tracking:
+  - No analytics SDKs; no identifiers; note “No tracking” in Data Safety.
+- Crash handling:
+  - Use local logging only; avoid remote crash uploads by default.
+- Store listing text:
+  - Highlight offline operation, refusal behavior, and user-controlled web/LLM toggles.
